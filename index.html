@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eClinic - Digital Healthcare Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Authentication Screen -->
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <div class="logo-icon">🏥</div>
+                    <h1>eClinic</h1>
+                </div>
+                <p>Your digital gateway to quality healthcare</p>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <h2>Welcome Back</h2>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn-primary">Sign In</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" onclick="showRegister()">Create Account</a></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form" style="display: none;">
+                <h2>Create Account</h2>
+                <form id="registerFormElement">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <input type="email" id="registerEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Phone Number</label>
+                        <input type="tel" id="registerPhone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" name="password" required minlength="6" placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6" placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" onclick="showLogin()">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="mainApp" class="main-app" style="display: none;">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🏥</div>
+                    <h1>eClinic</h1>
+                </div>
+                <div class="user-info">
+                    <span id="userWelcome">Welcome back!</span>
+                    <button onclick="logout()" class="btn-secondary">Sign Out</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <!-- Booking Section -->
+                <div id="bookingSection" class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Schedule Your Appointment</h2>
+                            <p>Choose your preferred doctor and time slot</p>
+                        </div>
+                        <form id="appointmentForm">
+                            <div class="form-group">
+                                <label for="doctor">Select Doctor *</label>
+                                <select id="doctor" name="doctor" required>
+                                    <option value="">Choose a doctor...</option>
+                                    <option value="Dr. Sarah Smith - Cardiologist">Dr. Sarah Smith - Cardiologist</option>
+                                    <option value="Dr. Michael Chen - Dermatologist">Dr. Michael Chen - Dermatologist</option>
+                                    <option value="Dr. Emily Johnson - General Practitioner">Dr. Emily Johnson - General Practitioner</option>
+                                    <option value="Dr. David Williams - Pediatrician">Dr. David Williams - Pediatrician</option>
+                                    <option value="Dr. Lisa Brown - Orthopedic">Dr. Lisa Brown - Orthopedic</option>
+                                    <option value="Dr. Robert Davis - Neurologist">Dr. Robert Davis - Neurologist</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="appointmentDate">Appointment Date *</label>
+                                    <input type="date" id="appointmentDate" name="appointmentDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="appointmentTime">Appointment Time *</label>
+                                    <input type="time" id="appointmentTime" name="appointmentTime" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reason">Reason for Visit</label>
+                                <textarea id="reason" name="reason" rows="3" 
+                                          placeholder="Brief description of your concern (optional)"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="repeat">Repeat Appointment</label>
+                                <select id="repeat" name="repeat">
+                                    <option value="none">No repeat</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Schedule Appointment</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Appointments Section -->
+                <div id="appointmentsSection" class="section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Your Appointments</h2>
+                            <p>Manage and view your scheduled appointments</p>
+                        </div>
+                        <div id="appointmentsList"></div>
+                        <div id="noAppointments" class="no-appointments" style="display: none;">
+                            <div class="empty-state">
+                                <div class="empty-icon">📅</div>
+                                <h3>No Appointments Yet</h3>
+                                <p>You haven't scheduled any appointments yet. Book your first appointment to get started.</p>
+                                <button onclick="showBookingSection()" class="btn-primary">Book Your First Appointment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offline-message" id="offlineMessage" style="display: none;">
+                    <p>You are currently offline. Chat is not available, but you can still manage appointments.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="showBookingSection()">
+                <div class="nav-icon">📅</div>
+                <span>Book</span>
+            </button>
+            <button class="nav-btn" onclick="showAppointmentsSection()">
+                <div class="nav-icon">📋</div>
+                <span>Appointments</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Edit Appointment Modal -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Appointment</h3>
+                <span class="close" onclick="closeEditModal()">&times;</span>
+            </div>
+            <form id="editAppointmentForm">
+                <input type="hidden" id="editAppointmentId">
+                <div class="form-group">
+                    <label for="editDoctor">Select Doctor *</label>
+                    <select id="editDoctor" name="doctor" required>
+                        <option value="">Choose a doctor...</option>
+                        <option value="Dr. Sarah Smith - Cardiologist">Dr. Sarah Smith - Cardiologist</option>
+                        <option value="Dr. Michael Chen - Dermatologist">Dr. Michael Chen - Dermatologist</option>
+                        <option value="Dr. Emily Johnson - General Practitioner">Dr. Emily Johnson - General Practitioner</option>
+                        <option value="Dr. David Williams - Pediatrician">Dr. David Williams - Pediatrician</option>
+                        <option value="Dr. Lisa Brown - Orthopedic">Dr. Lisa Brown - Orthopedic</option>
+                        <option value="Dr. Robert Davis - Neurologist">Dr. Robert Davis - Neurologist</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editDate">Appointment Date *</label>
+                        <input type="date" id="editDate" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTime">Appointment Time *</label>
+                        <input type="time" id="editTime" name="time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editReason">Reason for Visit</label>
+                    <textarea id="editReason" name="reason" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="closeEditModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Update Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="successMessage" class="success-message" style="display: none;">
+        <p>Operation completed successfully!</p>
+    </div>
+
+    <!-- Tawk.to Live Chat -->
+    <script type="text/javascript">
+        // Only load Tawk.to when online
+        if (navigator.onLine) {
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function(){
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/YOUR_TAWK_TO_ID/default';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+            })();
+        }
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>
